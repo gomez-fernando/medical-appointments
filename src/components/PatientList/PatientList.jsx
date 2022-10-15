@@ -1,6 +1,6 @@
 import { Patient } from "../Patient/Patient";
 
-export const PatientList = ({ patients }) => {
+export const PatientList = ({ patients, setPatient }) => {
   console.log(patients);
   return (
     <div className='md:w-1/2 lg:w-3/5 md:h-screen overflow-y-scroll'>
@@ -13,7 +13,7 @@ export const PatientList = ({ patients }) => {
           </p>
 
           {patients.map((patient) => (
-            <Patient key={patient.id} patient={patient} />
+            <Patient key={patient.id} patient={patient} setPatient={setPatient} />
           ))}
         </>
       ) : (
