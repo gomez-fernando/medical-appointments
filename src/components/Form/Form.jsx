@@ -1,17 +1,25 @@
 import { useState, useEffect } from "react";
 
 export const Form = () => {
-  const [name, setName] = useState("Hook");
+  const [name, setName] = useState("");
+  const [owner, setOwner] = useState("");
+  const [email, setEmail] = useState("");
+  const [dischard, setDischard] = useState("");
+  const [symptom, setSymptom] = useState("");
+
+  const handleSubmit = (e) => {
+    e.preventDeafult()
+  }
 
   return (
     <div className='md:w-1/2 lg:w-2/5'>
       <h2 className='font-black text-3xl text-center'>Seguimiento pacientes</h2>
-      <p className='text-lg text-center mt-5 mb-10'>
+      <p className='text-xl text-center mt-5 mb-10'>
         Añade pacientes y{" "}
         <span className='text-indigo-600 font-bold '>Adminístralos</span>
       </p>
 
-      <form className='bg-white shadow-md rounded-xl px-5 py-10 mb-10'>
+      <form onSubmit={handleSubmit} className='bg-white shadow-md rounded-xl px-5 py-10 mb-10 mx-5'>
         <div className='mb-5'>
           <label
             className='block text-gray-700 uppercase font-bold'
@@ -24,6 +32,8 @@ export const Form = () => {
             className='border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md'
             type='text'
             placeholder='Nombre de la mascota'
+            value={name}
+            onChange={(e) => setName(e.target.value)}
           />
         </div>
         <div className='mb-5'>
@@ -38,6 +48,8 @@ export const Form = () => {
             className='border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md'
             type='text'
             placeholder='Nombre del propietario'
+            value={owner}
+            onChange={(e) => setOwner(e.target.value)}
           />
         </div>
         <div className='mb-5'>
@@ -52,6 +64,8 @@ export const Form = () => {
             className='border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md'
             type='email'
             placeholder='Email de contacto'
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
         </div>
         <div className='mb-5'>
@@ -65,6 +79,8 @@ export const Form = () => {
             id='dischard'
             className='border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md'
             type='date'
+            value={dischard}
+            onChange={(e) => setDischard(e.target.value)}
           />
         </div>
         <div className='mb-5'>
@@ -78,6 +94,8 @@ export const Form = () => {
             id='symptom'
             className='border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md'
             placeholder='Describe los síntomas'
+            value={symptom}
+            onChange={(e) => setSymptom(e.target.value)}
           />
         </div>
         <div className='flex justify-center'>
