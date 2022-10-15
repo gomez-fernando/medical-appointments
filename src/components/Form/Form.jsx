@@ -1,15 +1,39 @@
 import { useState, useEffect } from "react";
+import { Error } from "../Error/Error";
 
-export const Form = () => {
+export const Form = ({ patients, setPatients }) => {
   const [name, setName] = useState("");
   const [owner, setOwner] = useState("");
   const [email, setEmail] = useState("");
   const [dischard, setDischard] = useState("");
   const [symptom, setSymptom] = useState("");
+  const [error, setError] = useState(false);
 
   const handleSubmit = (e) => {
-    e.preventDeafult()
-  }
+    e.preventDefault();
+
+    if ([name, owner, email, dischard, symptom].includes("")) {
+      console.log("Hay al menos un campo vacío");
+      setError(true);
+      return;
+    }
+
+    setError(false);
+
+    const patient = {
+      name, owner, email, dischard, symptom
+    }
+
+    console.log(patient)
+
+    setPatients([...patients, patient]);
+    
+    setName('');
+    setOwner('');
+    setEmail('');
+    setDischard('');
+    setSymptom('');
+  };
 
   return (
     <div className='md:w-1/2 lg:w-2/5'>
@@ -19,7 +43,11 @@ export const Form = () => {
         <span className='text-indigo-600 font-bold '>Adminístralos</span>
       </p>
 
-      <form onSubmit={handleSubmit} className='bg-white shadow-md rounded-xl px-5 py-10 mb-10 mx-5'>
+      <form
+        onSubmit={handleSubmit}
+        className='bg-white shadow-md rounded-xl px-5 py-10 mb-10 mx-5'
+      >
+        {!!error && <Error><p>Todos los campos son obligatorios</p></Error>}
         <div className='mb-5'>
           <label
             className='block text-gray-700 uppercase font-bold'
