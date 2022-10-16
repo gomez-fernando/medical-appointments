@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Error } from "../Error/Error";
 
-export const Form = ({ patients, setPatients }) => {
+export const Form = ({ patients, setPatients, patient, setPatient }) => {
   const [name, setName] = useState("");
   const [owner, setOwner] = useState("");
   const [email, setEmail] = useState("");
@@ -9,37 +9,61 @@ export const Form = ({ patients, setPatients }) => {
   const [symptom, setSymptom] = useState("");
   const [error, setError] = useState(false);
 
+  useEffect(() => {
+    if (Object.keys(patient).length > 0) {
+      setName(patient.name);
+      setOwner(patient.owner);
+      setEmail(patient.email);
+      setDischard(patient.dischard);
+      setSymptom(patient.symptom);
+    }
+  }, [patient]);
+
   const generateId = () => {
     const random = Math.random().toString(36).substring(2);
     const date = Date.now().toString(36);
 
     return random + date;
-  }
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     if ([name, owner, email, dischard, symptom].includes("")) {
-      console.log("Hay al menos un campo vacío");
+      console.log(patient);
       setError(true);
-      return;
+      // return;
+    } else {
+      setError(false);
+
+      const newPatient = {
+        name,
+        owner,
+        email,
+        dischard,
+        symptom,
+        id: generateId(),
+      };
+
+      if (patient.id) {
+        newPatient.id = patient.id;
+        const updatedPatients = patients.map((patientState) =>
+          patientState.id === patient.id ? newPatient : patientState
+        );
+        setPatients(updatedPatients);
+        setPatient({})
+      } else {
+        // add new Patient
+        newPatient.id = generateId();
+        setPatients([...patients, newPatient]);
+      }
+
+      setName("");
+      setOwner("");
+      setEmail("");
+      setDischard("");
+      setSymptom("");
     }
-
-    setError(false);
-
-    const patient = {
-      name, owner, email, dischard, symptom, id: generateId()
-    }
-
-    console.log(patient)
-
-    setPatients([...patients, patient]);
-    
-    setName('');
-    setOwner('');
-    setEmail('');
-    setDischard('');
-    setSymptom('');
   };
 
   return (
@@ -54,7 +78,11 @@ export const Form = ({ patients, setPatients }) => {
         onSubmit={handleSubmit}
         className='bg-white shadow-md rounded-xl px-5 py-10 mb-10 mx-5'
       >
-        {!!error && <Error><p>Todos los campos son obligatorios</p></Error>}
+        {!!error && (
+          <Error>
+            <p>Todos los campos son obligatorios</p>
+          </Error>
+        )}
         <div className='mb-5'>
           <label
             className='block text-gray-700 uppercase font-bold'
@@ -137,6 +165,7 @@ export const Form = ({ patients, setPatients }) => {
           <input
             type='submit'
             className='bg-indigo-600 p-3 lg:w-1/2 md:w-full text-white uppercase font-bold  cursor-pointer transition-all rounded-md hover:bg-indigo-700 '
+            value={patient.id ? "Editar paciente" : "Añadir paciente"}
           />
         </div>
       </form>
