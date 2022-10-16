@@ -1,7 +1,7 @@
 
 # Veterinary Appointments
 
-<img src="https://raw.githubusercontent.com/sagar-viradiya/sagar-viradiya/master/resources/banner.png" alt="Hello world">
+<img src="https://gomez-fernando.github.io/portfolio/readme-image.png" alt="Red Heart Design">
 
 ## An app developed with React
 This is an example of a control of appointments and patients app.
