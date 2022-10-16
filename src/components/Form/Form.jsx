@@ -136,7 +136,7 @@ export const Form = ({ patients, setPatients, patient, setPatient }) => {
             className='block text-gray-700 uppercase font-bold'
             htmlFor='dischard'
           >
-            Alta
+            Fecha Cita
           </label>
           <input
             id='dischard'
