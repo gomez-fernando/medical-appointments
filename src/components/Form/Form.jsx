@@ -32,7 +32,6 @@ export const Form = ({ patients, setPatients, patient, setPatient }) => {
     if ([name, owner, email, dischard, symptom].includes("")) {
       console.log(patient);
       setError(true);
-      // return;
     } else {
       setError(false);
 
@@ -46,6 +45,7 @@ export const Form = ({ patients, setPatients, patient, setPatient }) => {
       };
 
       if (patient.id) {
+        // edit patient
         newPatient.id = patient.id;
         const updatedPatients = patients.map((patientState) =>
           patientState.id === patient.id ? newPatient : patientState
@@ -67,7 +67,7 @@ export const Form = ({ patients, setPatients, patient, setPatient }) => {
   };
 
   return (
-    <div className='md:w-1/2 lg:w-2/5'>
+    <div className='md:w-1/2 lg:w-2/5 -mt-10'>
       <h2 className='font-black text-3xl text-center'>Seguimiento pacientes</h2>
       <p className='text-xl text-center mt-5 mb-10'>
         Añade pacientes y{" "}

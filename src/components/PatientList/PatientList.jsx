@@ -3,7 +3,7 @@ import { Patient } from "../Patient/Patient";
 export const PatientList = ({ patients, setPatient, dropPatient }) => {
 
   return (
-    <div className='md:w-1/2 lg:w-3/5 md:h-screen overflow-y-scroll'>
+    <div className='md:w-1/2 lg:w-3/5 md:h-screen overflow-y-scroll -mt-10'>
       {patients && patients.length ? (
         <>
           <h2 className='font-black text-3xl text-center'>Listado Pacientes</h2>

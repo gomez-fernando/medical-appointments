@@ -1,4 +1,3 @@
-import { Header } from "./components/Header/Header";
 import { Form } from "./components/Form/Form";
 import { PatientList } from "./components/PatientList/PatientList";
 import { useState, useEffect } from "react";
@@ -11,16 +10,6 @@ function App() {
   const [patients, setPatients] = useState(initPatients);
   const [patient, setPatient] = useState({});
 
-  // useEffect(() => {
-  //   const getPatientsLocalStorage = () => {
-  //     const patientsLS = localStorage.getItem('patients')
-  //     console.log(patientsLS)
-  //   }
-
-  //   console.log('1');
-  //   getPatientsLocalStorage();
-  // }, [])
-
   useEffect(() => {
     localStorage.setItem('patients', JSON.stringify(patients));
   }, [patients])
@@ -32,7 +21,6 @@ function App() {
 
   return (
     <div className='container mx-auto mt-20'>
-      <Header />
       <div className='mt-12 md:flex'>
         <Form patients={patients} setPatients={setPatients} patient={patient} setPatient={setPatient} />
         <PatientList 
